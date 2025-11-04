@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - VillageCraft Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fafafa;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #222;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .icon-btn {
+            font-size: 1.2rem;
+            color: #444;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .checkout-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .checkout-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #49d8b9;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+
+        .place-order-btn {
+            background: #49d8b9;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .place-order-btn:hover {
+            background: #3bc4a7;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .back-to-shop {
+            display: inline-block;
+            color: #49d8b9;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">VillageCraft Connect</a>
+        <div class="header-right">
+            <a href="#" class="icon-btn" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-badge" id="cartCount">0</div>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Checkout</h1>
+        
+        <div class="checkout-container">
+            <div class="checkout-section">
+                <h2>Shipping Information</h2>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <textarea id="address" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="zipCode">ZIP Code</label>
+                            <input type="text" id="zipCode" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" required>
+                            <option value="">Select Country</option>
+                            <option value="IN">India</option>
+                            <option value="US">United States</option>
+                            <option value="UK">United Kingdom</option>
+                        </select>
+                    </div>
+
+                    <h2 style="margin-top: 30px;">Payment Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" required>
+                    </div>
+
+                    <button type="submit" class="place-order-btn">
+                        <i class="fas fa-lock"></i> Place Order
+                    </button>
+                </form>
+            </div>
+
+            <div class="checkout-section">
+                <h2>Order Summary</h2>
+                <div id="orderSummary">
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                        <a href="index.html" class="back-to-shop">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal will be injected by cart.js -->
+    <script src="cart.js"></script>
+    <script>
+        // Checkout specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrderSummary();
+            setupCheckoutForm();
+        });
+
+        function loadOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('vcc_cart')) || [];
+            const orderSummary = document.getElementById('orderSummary');
+            
+            if (cart.length === 0) {
+                orderSummary.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                        <a href="index.html" class="back-to-shop">Continue Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let summaryHTML = '<div class="order-summary">';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                summaryHTML += `
+                    <div class="order-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <div>Qty: ${item.quantity}</div>
+                        </div>
+                        <div>R${itemTotal}</div>
+                    </div>
+                `;
+                subtotal += itemTotal;
+            });
+            
+            const shipping = 50;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            summaryHTML += `
+                <div class="order-item">
+                    <div>Subtotal</div>
+                    <div>R${subtotal}</div>
+                </div>
+                <div class="order-item">
+                    <div>Shipping</div>
+                    <div>R${shipping}</div>
+                </div>
+                <div class="order-item">
+                    <div>Tax</div>
+                    <div>R${tax.toFixed(2)}</div>
+                </div>
+                <div class="order-total">
+                    <div>Total</div>
+                    <div>R${total.toFixed(2)}</div>
+                </div>
+            </div>`;
+            
+            orderSummary.innerHTML = summaryHTML;
+        }
+
+        function setupCheckoutForm() {
+            const form = document.getElementById('checkoutForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Process the order
+                processOrder();
+            });
+        }
+
+        function processOrder() {
+            const cart = JSON.parse(localStorage.getItem('vcc_cart')) || [];
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Create order object
+            const order = {
+                id: 'VC-' + Date.now(),
+                date: new Date().toISOString(),
+                items: [...cart], // Copy cart items
+                status: 'pending',
+                total: calculateOrderTotal(),
+                shipping: {
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value
+                }
+            };
+
+            // Save order to localStorage
+            const orders = JSON.parse(localStorage.getItem('vcc_orders')) || [];
+            orders.push(order);
+            localStorage.setItem('vcc_orders', JSON.stringify(orders));
+
+            // Clear cart
+            universalCart.clearCart();
+
+            // Show success message and redirect
+            alert('Order placed successfully! Order ID: ' + order.id);
+            window.location.href = 'index.html';
+        }
+
+        function calculateOrderTotal() {
+            const cart = JSON.parse(localStorage.getItem('vcc_cart')) || [];
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = 50;
+            const tax = subtotal * 0.08;
+            return subtotal + shipping + tax;
+        }
+    </script>
+</body>
+</html>

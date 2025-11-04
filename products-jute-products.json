@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": 10,
+      "name": "Jute Shopping Bag",
+      "price": 150,
+      "image": "jute-bag.jpg",
+      "description": "Eco-friendly jute shopping bag with prints",
+      "artisan": "Neha Gupta",
+      "category": "jute-products"
+    },
+    {
+      "id": 11,
+      "name": "Jute Wall Hanging",
+      "price": 320,
+      "image": "wall-hanging.jpg",
+      "description": "Decorative wall hanging made from natural jute",
+      "artisan": "Arun Joshi",
+      "category": "jute-products"
+    },
+    {
+      "id": 12,
+      "name": "Jute Coasters",
+      "price": 180,
+      "image": "jute-coasters.jpg",
+      "description": "Set of 6 handmade jute coasters",
+      "artisan": "Pooja Sharma",
+      "category": "jute-products"
+    }
+  ]
+}

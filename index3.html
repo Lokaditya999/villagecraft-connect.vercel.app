@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jute Products - VillageCraft Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fafafa;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #222;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: #444;
+            transition: color .2s;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #49d8b9;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #49d8b9;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: #222;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .icon-btn {
+            font-size: 1.2rem;
+            color: #444;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 60px;
+            padding: 0 24px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .page-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .product-artisan {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 32px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 380px;
+            position: relative;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 1.5rem;
+            color: #d9534f;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #c9302c;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .modal-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #login-form .modal-button {
+            background: #49d8b9;
+            color: #fff;
+        }
+
+        #register-form .modal-button {
+            background: #e8bc0e;
+            color: #0e0f11;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .header-right {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">VillageCraft Connect</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#">Marketplace</a>
+            <a href="videos.html">Videos & Tutorials</a>
+            <a href="#">Courses</a>
+        </nav>
+        <div class="header-right">
+            <a href="#" class="icon-btn" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-badge" id="cartCount">0</div>
+            </a>
+            <a href="#" class="btn-secondary" onclick="openModal('login')">Login</a>
+            <a href="#" class="btn-primary" onclick="openModal('register')">Register</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">Eco-friendly Jute Products</h1>
+        <p class="page-description">
+            Embrace sustainability with our beautiful jute products. Made from natural fibers, each item is not only eco-friendly 
+            but also showcases the incredible skill of our rural artisans.
+        </p>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute1.jpg" alt="Jute Shopping Bag">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Shopping Bag</h3>
+                    <div class="product-artisan">by Priya Sharma</div>
+                    <p class="product-description">Eco-friendly shopping bag with hand-woven design. Strong, durable, and perfect for daily use.</p>
+                    <div class="product-price">R280</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Shopping Bag', 280, 'jute1.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute2.jpg" alt="Jute Wall Hanging">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Wall Hanging</h3>
+                    <div class="product-artisan">by Ravi Verma</div>
+                    <p class="product-description">Beautiful handcrafted wall hanging with traditional motifs. Adds warmth to any room.</p>
+                    <div class="product-price">R450</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Wall Hanging', 450, 'jute2.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute3.jpg" alt="Jute Plant Hangers">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Plant Hangers</h3>
+                    <div class="product-artisan">by Meera Devi</div>
+                    <p class="product-description">Set of 3 macrame plant hangers in different lengths. Perfect for your indoor plants.</p>
+                    <div class="product-price">R380</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Plant Hangers', 380, 'jute3.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute4.jpg" alt="Jute Coasters">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Coasters</h3>
+                    <div class="product-artisan">by Aylun Patel</div>
+                    <p class="product-description">Set of 6 handmade jute coasters with colorful embroidery. Protects surfaces beautifully.</p>
+                    <div class="product-price">R220</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Coasters', 220, 'jute4.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute11.jpg" alt="Jute Table Mat">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Table Mat</h3>
+                    <div class="product-artisan">by Rajesh Kumar</div>
+                    <p class="product-description">Handwoven table mat set of 4. Natural and sustainable addition to your dining table.</p>
+                    <div class="product-price">R320</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Table Mat', 320, 'jute5.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/jute12.jpg" alt="Jute Basket">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Jute Storage Basket</h3>
+                    <div class="product-artisan">by Sanjay Gupta</div>
+                    <p class="product-description">Versatile storage basket perfect for organizing. Great for laundry, toys, or magazines.</p>
+                    <div class="product-price">R480</div>
+                    <div class="product-actions">
+                        <button class="btn-secondary">View Details</button>
+                        <button class="btn-primary" onclick="universalCart.addToCart('Jute Storage Basket', 480, 'jute6.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('login')">X</span>
+            <h2>Log In</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-email">Email / Username</label>
+                    <input type="text" id="login-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="modal-button">Log In</button>
+                <p style="margin-top:15px; text-align:center;">
+                    <a onclick="switchModal('register')" style="color:#49d8b9; cursor:pointer;">New user? Register here.</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('register')">X</span>
+            <h2>Create Account</h2>
+            <form id="register-form">
+                <div class="input-group">
+                    <label for="reg-type">I am a...</label>
+                    <select id="reg-type" required>
+                        <option value="">-- Select --</option>
+                        <option value="artisan">Rural Artisan</option>
+                        <option value="buyer">Client/Buyer</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <button type="submit" class="modal-button">Register Now</button>
+                <p style="margin-top:15px; text-align:center;">
+                    <a onclick="switchModal('login')" style="color:#49d8b9; cursor:pointer;">Already a member? Log in.</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Universal Cart -->
+    <script src="cart.js"></script>
+    <script>
+    // Enhanced login/logout functionality
+    function handleLogin(email, name, type) {
+        localStorage.setItem('vcc_isLoggedIn', 'true');
+        localStorage.setItem('vcc_userEmail', email);
+        localStorage.setItem('vcc_userName', name);
+        localStorage.setItem('vcc_userType', type);
+        
+        // Initialize user's cart after login
+        universalCart.initializeUserCart();
+        
+        alert('Login successful!');
+        closeModal('login');
+        location.reload();
+    }
+
+    function handleRegister(type, name, email, password) {
+        localStorage.setItem('vcc_isLoggedIn', 'true');
+        localStorage.setItem('vcc_userEmail', email);
+        localStorage.setItem('vcc_userName', name);
+        localStorage.setItem('vcc_userType', type);
+        
+        // Initialize user's cart after registration
+        universalCart.initializeUserCart();
+        
+        alert('Registration successful!');
+        closeModal('register');
+        location.reload();
+    }
+
+    // Modal control functions
+    function openModal(type) {
+        document.getElementById(type + '-modal').style.display = 'flex';
+    }
+
+    function closeModal(type) {
+        document.getElementById(type + '-modal').style.display = 'none';
+    }
+
+    function switchModal(to) {
+        closeModal(to === 'register' ? 'login' : 'register');
+        openModal(to);
+    }
+
+    // Close modal when clicking outside
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.style.display = 'none';
+        });
+    });
+
+    // Enhanced Login/Register form handling
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (email && password) {
+                    handleLogin(email, email.split('@')[0], 'buyer');
+                } else {
+                    alert('Please fill in all fields');
+                }
+            });
+        }
+
+        if (registerForm) {
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const type = document.getElementById('reg-type').value;
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const password = document.getElementById('reg-password').value;
+                
+                if (type && name && email && password) {
+                    handleRegister(type, name, email, password);
+                } else {
+                    alert('Please fill in all fields');
+                }
+            });
+        }
+
+        // Check if user is logged in on page load
+        const isLoggedIn = localStorage.getItem('vcc_isLoggedIn') === 'true';
+        if (isLoggedIn) {
+            // Cart will be automatically loaded by universalCart
+            console.log('User is logged in, cart loaded');
+        }
+    });
+
+    // Add login required overlay to product cards
+    function addLoginOverlays() {
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            const isLoggedIn = localStorage.getItem('vcc_isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                const overlay = document.createElement('div');
+                overlay.className = 'login-required-overlay';
+                overlay.innerHTML = `
+                    <i class="fas fa-lock"></i>
+                    <p>Login to add to cart</p>
+                    <button class="btn-primary" onclick="openModal('login')">Login Now</button>
+                `;
+                card.style.position = 'relative';
+                card.appendChild(overlay);
+            }
+        });
+    }
+
+    // Initialize login overlays
+    document.addEventListener('DOMContentLoaded', addLoginOverlays);
+</script>
+    <script>
+        // Modal control functions
+        function openModal(type) {
+            document.getElementById(type + '-modal').style.display = 'flex';
+        }
+
+        function closeModal(type) {
+            document.getElementById(type + '-modal').style.display = 'none';
+        }
+
+        function switchModal(to) {
+            closeModal(to === 'register' ? 'login' : 'register');
+            openModal(to);
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.style.display = 'none';
+            });
+        });
+
+        // Login/Register form handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (email && password) {
+                localStorage.setItem('vcc_isLoggedIn', 'true');
+                localStorage.setItem('vcc_userEmail', email);
+                alert('Login successful!');
+                closeModal('login');
+                location.reload();
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const type = document.getElementById('reg-type').value;
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            
+            if (type && name && email && password) {
+                localStorage.setItem('vcc_isLoggedIn', 'true');
+                localStorage.setItem('vcc_userEmail', email);
+                localStorage.setItem('vcc_userType', type);
+                localStorage.setItem('vcc_userName', name);
+                alert('Registration successful!');
+                closeModal('register');
+                location.reload();
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('vcc_isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                const userName = localStorage.getItem('vcc_userName') || 'User';
+                // Update login button to show user is logged in
+                const loginBtn = document.querySelector('.btn-secondary');
+                if (loginBtn) {
+                    loginBtn.textContent = `Welcome, ${userName}`;
+                    loginBtn.style.background = '#49d8b9';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

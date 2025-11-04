@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos & Tutorials</title>
+    <style>
+        /* Basic Reset and Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Styling */
+        .page-header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        /* Control Section (Filter and Tabs) */
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Filter Dropdown */
+        .filter-dropdown select {
+            padding: 8px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1em;
+            min-width: 180px;
+            background: white;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            margin-right: 5px;
+            font-size: 1em;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+
+        .tab-button:hover {
+            color: #000;
+        }
+
+        .tab-button.active {
+            color: #000;
+            font-weight: bold;
+            border-bottom: 2px solid #000;
+        }
+
+        /* --- Video Grid Layout --- */
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Video Card Styling */
+        .video-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            /* Aspect ratio for the video container (16:9) */
+            padding-top: 56.25%; 
+            background-color: #e9ecef; 
+        }
+        
+        /* CSS for the Video Player */
+        .video-thumbnail video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video fills the container */
+            border: none;
+        }
+
+        .tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000; 
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-info h2 {
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .video-info .description {
+            font-size: 0.9em;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .video-card .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #868e96;
+        }
+
+        .video-card .meta .author {
+            font-weight: bold;
+        }
+        
+        /* Media query for responsiveness */
+        @media (max-width: 600px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Videos & Tutorials</h1>
+            <p>Learn traditional crafting techniques from master artisans</p>
+        </header>
+
+        <div class="controls-section">
+            <div class="filter-dropdown">
+                <select>
+                    <option>All Categories</option>
+                    <option>Pottery</option>
+                    <option>Weaving</option>
+                    <option>Wood Carving</option>
+                </select>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-button active">All Videos</button>
+                <button class="tab-button">Tutorials</button>
+                <button class="tab-button">Showcases</button>
+                <button class="tab-button">Course Previews</button>
+            </div>
+        </div>
+
+        <div class="video-grid">
+            
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <video controls poster="path/to/your/pottery-poster.jpg">
+                        <source src="video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="tag">tutorial</span>
+                </div>
+                <div class="video-info">
+                    <h2>How to Make Clay Pottery</h2>
+                    <p class="description">Learn the fundamentals of clay pottery making from selecting the right clay to creating your first pot. This comprehensive tutorial covers hand-building, wheel throwing, and basic glazing techniques for beautiful finished pieces.</p>
+                    <div class="meta">
+                        <span class="author">👤 Arjun Patel</span>
+                        <span class="views">👁️ 3,245</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <video controls poster="path/to/your/weaving-poster.jpg">
+                        <source src="video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="tag">tutorial</span>
+                </div>
+                <div class="video-info">
+                    <h2>Weaving Techniques for Beginners</h2>
+                    <p class="description">Discover the art of traditional weaving with step-by-step instructions for beginners. This tutorial walks you through basic weaving patterns, loom setup, and yarn selection to create your own scarves and wall hangings.</p>
+                    <div class="meta">
+                        <span class="author">👤 Ravi Verma</span>
+                        <span class="views">👁️ 4,567</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <video controls poster="path/to/your/carving-poster.jpg">
+                        <source src="video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="tag">tutorial</span>
+                </div>
+                <div class="video-info">
+                    <h2>Wood Carving Basics</h2>
+                    <p class="description">Master the essential wood carving techniques with this beginner-friendly tutorial. Learn about different types of wood, carving tools, safety precautions, and how to create simple geometric and decorative patterns.</p>
+                    <div class="meta">
+                        <span class="author">👤 Vikram Singh</span>
+                        <span class="views">👁️ 2,890</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <video controls poster="path/to/your/showcase-poster.jpg">
+                        <source src="path/to/your/showcase-video.mp4" type="video/mp4">
+                        Your browser does support the video tag.
+                    </video>
+                    <span class="tag">showcase</span>
+                </div>
+                <div class="video-info">
+                    <h2>Master's Quilt Showcase</h2>
+                    <p class="description">A detailed look at the intricate process and final result of a traditional master quilt. This video showcases advanced stitching techniques, fabric dyeing, and historical context of the piece. Great inspiration for advanced learners!</p>
+                    <div class="meta">
+                        <span class="author">👤 Neela Devi</span>
+                        <span class="views">👁️ 1,500</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

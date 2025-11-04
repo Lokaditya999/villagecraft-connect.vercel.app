@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": 7,
+      "name": "Ceramic Dinner Set",
+      "price": 1200,
+      "image": "dinner-set.jpg",
+      "description": "Complete dinner set with hand-painted designs",
+      "artisan": "Aarav Mehta",
+      "category": "kitchen-usage"
+    },
+    {
+      "id": 8,
+      "name": "Clay Cooking Pot",
+      "price": 650,
+      "image": "cooking-pot.jpg",
+      "description": "Traditional clay pot for healthy cooking",
+      "artisan": "Lakshmi Nair",
+      "category": "kitchen-usage"
+    },
+    {
+      "id": 9,
+      "name": "Spice Containers",
+      "price": 280,
+      "image": "spice-containers.jpg",
+      "description": "Set of clay spice containers with lids",
+      "artisan": "Rohit Kumar",
+      "category": "kitchen-usage"
+    }
+  ]
+}

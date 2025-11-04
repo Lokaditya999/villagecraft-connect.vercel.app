@@ -1,0 +1,58 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Clay Water Pot",
+      "price": 450,
+      "image": "water-pot.jpg",
+      "description": "Traditional handcrafted clay pot for natural water cooling",
+      "artisan": "Rajesh Kumar",
+      "category": "water-usage"
+    },
+    {
+      "id": 2,
+      "name": "Terracotta Jug",
+      "price": 380,
+      "image": "terracotta-jug.jpg",
+      "description": "Beautiful terracotta jug for storing and serving water",
+      "artisan": "Priya Sharma",
+      "category": "water-usage"
+    },
+    {
+      "id": 3,
+      "name": "Matka Cooler",
+      "price": 520,
+      "image": "matka-cooler.jpg",
+      "description": "Traditional matka for natural water cooling in summer",
+      "artisan": "Anil Patel",
+      "category": "water-usage"
+    },
+    {
+      "id": 4,
+      "name": "Hand-Painted Surahi",
+      "price": 490,
+      "image": "surahi.jpg",
+      "description": "Elegant surahi with hand-painted traditional motifs",
+      "artisan": "Meera Devi",
+      "category": "water-usage"
+    },
+    {
+      "id": 5,
+      "name": "Earthen Filter",
+      "price": 680,
+      "image": "earthen-filter.jpg",
+      "description": "Natural water filtration system using clay",
+      "artisan": "Vikram Singh",
+      "category": "water-usage"
+    },
+    {
+      "id": 6,
+      "name": "Mini Matka Set",
+      "price": 320,
+      "image": "mini-matka.jpg",
+      "description": "Set of small matkas for decorative and functional use",
+      "artisan": "Sunita Reddy",
+      "category": "water-usage"
+    }
+  ]
+}

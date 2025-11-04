@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": 13,
+      "name": "Traditional Ceramic Bowl",
+      "price": 320,
+      "image": "ceramic-bowl.jpg",
+      "description": "Traditional handcrafted ceramic bowl featuring intricate blue and white patterns",
+      "artisan": "Aylun Patel",
+      "category": "ceramic-products"
+    },
+    {
+      "id": 14,
+      "name": "Elegant Ceramic Vase",
+      "price": 450,
+      "image": "ceramic-vase.jpg",
+      "description": "Elegant ceramic vase with hand-painted floral motifs",
+      "artisan": "Ravi Verma",
+      "category": "ceramic-products"
+    },
+    {
+      "id": 15,
+      "name": "Ceramic Dinner Plate Set",
+      "price": 580,
+      "image": "ceramic-plates.jpg",
+      "description": "Handmade ceramic dinner plate set with earthy tones",
+      "artisan": "Meera Devi",
+      "category": "ceramic-products"
+    }
+  ]
+}
